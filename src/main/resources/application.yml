@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test;
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+#      application 실행시 table 삭제 및 생성
+      ddl-auto: create
+    properties:
+      hibernate:
+#        system out으로 보여짐
+#        show_sql: true
+        forma_sql: true
+
+logging:
+  level:
+#    hibernate jpa가 생성하는 sql 보여짐(logger)
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
