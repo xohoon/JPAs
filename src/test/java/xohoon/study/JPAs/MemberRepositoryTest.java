@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+import xohoon.study.JPAs.domain.Member;
+import xohoon.study.JPAs.repository.MemberRepository;
 
 import static org.junit.Assert.*;
 
@@ -15,8 +17,10 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class MemberRepositoryTest {
 
-    @Autowired MemberRepository memberRepository;
-    
+    @Autowired
+    MemberRepository memberRepository;
+
+/*
     @Test
     @Transactional // test에 있으면 완료 후 db 롤백 -> @Rollback(false) 롤백 안함
     @Rollback(false)
@@ -24,7 +28,6 @@ public class MemberRepositoryTest {
         //given
         Member member = new Member();
         member.setUsername("memberA");
-
         //when
         Long saveId = memberRepository.save(member);
         Member findMember = memberRepository.find(saveId);
@@ -35,4 +38,5 @@ public class MemberRepositoryTest {
         Assertions.assertThat(findMember).isEqualTo(member);
         System.out.println("findMember == member : " + (findMember == member));
     }
+* */
 }
