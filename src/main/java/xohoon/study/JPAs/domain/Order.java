@@ -1,6 +1,8 @@
 package xohoon.study.JPAs.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 생성 메서드 제한
 public class Order {
 
     @Id @GeneratedValue
@@ -21,7 +24,8 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) //  Order만 persist 하면 orderItem 같이 persist 호출
+    //  Order만 persist 하면 orderItem 같이 persist 호출 (많이 사용되는건 cascade 하지말고 매번 persist)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // -> xxToOne 은 지연로딩으로 변경
