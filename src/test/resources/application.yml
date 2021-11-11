@@ -1,23 +1,20 @@
+# ------------------------------------------------
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/test;
+    url: jdbc:h2:mem:test
     username: sa
     password:
     driver-class-name: org.h2.Driver
 
   jpa:
     hibernate:
-#      application 실행시 table 삭제 및 생성
-#      create-drop -> 마지막에 table drop해줌
       ddl-auto: create
     properties:
       hibernate:
-#        system out으로 보여짐
-#        show_sql: true
+        show_sql: true
         forma_sql: true
-
+# 여기까지 없어도 테스트 티비로 돈다 (메모리 모드로 테스트 및 실행 가능) 메모리 모드로 테스트 하는게 정석일듯
 logging:
   level:
-#    hibernate jpa가 생성하는 sql 보여짐(logger)
     org.hibernate.SQL: debug
     org.hibernate.type: trace
