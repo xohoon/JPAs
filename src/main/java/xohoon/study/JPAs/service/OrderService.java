@@ -11,6 +11,9 @@ import xohoon.study.JPAs.domain.item.Item;
 import xohoon.study.JPAs.repository.ItemRepository;
 import xohoon.study.JPAs.repository.MemberRepository;
 import xohoon.study.JPAs.repository.OrderRepository;
+import xohoon.study.JPAs.repository.OrderSearch;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -59,4 +62,7 @@ public class OrderService {
     }
 
     //검색
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
+    }
 }

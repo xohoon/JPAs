@@ -1,6 +1,5 @@
 package xohoon.study.JPAs.repository;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import xohoon.study.JPAs.domain.Order;
@@ -12,10 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-@RequiredArgsConstructor
 public class OrderRepository {
 
     private final EntityManager em;
+
+    public OrderRepository(EntityManager em) {
+        this.em = em;
+    }
 
     public void save(Order order) {
         em.persist(order);
@@ -25,7 +27,7 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    public List<javax.persistence.criteria.Order> findAllByString(OrderSearch orderSearch) {
+    public List<Order> findAllByString(OrderSearch orderSearch) {
 
         String jpql = "select o from Order o join o.member m";
         boolean isFirstCondition = true;
@@ -52,7 +54,7 @@ public class OrderRepository {
             jpql += " m.name like :name";
         }
 
-        TypedQuery<javax.persistence.criteria.Order> query = em.createQuery(jpql, javax.persistence.criteria.Order.class)
+        TypedQuery<Order> query = em.createQuery(jpql, Order.class)
                 .setMaxResults(1000);
 
         if (orderSearch.getOrderStatus() != null) {
