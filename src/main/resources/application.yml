@@ -9,7 +9,7 @@ spring:
     hibernate:
 #      application 실행시 table 삭제 및 생성
 #      create-drop -> 마지막에 table drop해줌
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
 #        system out으로 보여짐
