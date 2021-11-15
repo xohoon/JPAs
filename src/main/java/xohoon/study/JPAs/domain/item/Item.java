@@ -2,6 +2,7 @@ package xohoon.study.JPAs.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 import xohoon.study.JPAs.domain.Category;
 import xohoon.study.JPAs.exception.NotEnoughStockException;
 

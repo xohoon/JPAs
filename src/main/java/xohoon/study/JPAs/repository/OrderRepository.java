@@ -104,6 +104,16 @@ public class  OrderRepository {
         ).getResultList();
     }
 
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                        "select o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
     // 컬렉션 페이조인 사용 x, 컬렉션 페치 조인은 1개만 사용가능,, 둘 이상 사용하면 데이터 부정합하게 조회
     public List<Order> findAllWithItem() {
 
@@ -117,4 +127,5 @@ public class  OrderRepository {
                 .setMaxResults(100) // oneToMany 에서는 fetch join 하면 안됨
                 .getResultList();
     }
+
 }

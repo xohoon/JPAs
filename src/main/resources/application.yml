@@ -15,6 +15,7 @@ spring:
 #        system out으로 보여짐
 #        show_sql: true
         format_sql: true
+        default_batch_fetch_size: 300
 
 logging:
   level:
