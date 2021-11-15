@@ -14,7 +14,7 @@ spring:
       hibernate:
 #        system out으로 보여짐
 #        show_sql: true
-        forma_sql: true
+        format_sql: true
 
 logging:
   level:
