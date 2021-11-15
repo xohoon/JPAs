@@ -9,6 +9,8 @@ import xohoon.study.JPAs.domain.Order;
 import xohoon.study.JPAs.domain.OrderStatus;
 import xohoon.study.JPAs.repository.OrderRepository;
 import xohoon.study.JPAs.repository.OrderSearch;
+import xohoon.study.JPAs.repository.order.simpleQuery.OrderSimpleQueryDto;
+import xohoon.study.JPAs.repository.order.simpleQuery.OrderSimpleQueryRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 public class OrderSimpleApiController {
 
     private final OrderRepository orderRepository;
+    private final OrderSimpleQueryRepository orderSimpleQueryRepository;
 
     // V1 : entity 직접 활용, member <-> order 무한루프
     @GetMapping("/api/v1/simple-orders")
@@ -60,6 +63,12 @@ public class OrderSimpleApiController {
                 .collect(Collectors.toList());
 
         return result;
+    }
+
+    // V4
+    @GetMapping("/api/v4/simple-orders")
+    public List<OrderSimpleQueryDto> orderV4() {
+        return orderSimpleQueryRepository.findOrderDtos();
     }
 
     @Data
