@@ -12,6 +12,8 @@ import xohoon.study.JPAs.domain.OrderItem;
 import xohoon.study.JPAs.domain.OrderStatus;
 import xohoon.study.JPAs.repository.OrderRepository;
 import xohoon.study.JPAs.repository.OrderSearch;
+import xohoon.study.JPAs.repository.order.query.OrderQueryDto;
+import xohoon.study.JPAs.repository.order.query.OrderQueryRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class OrderApiController {
 
     private final OrderRepository orderRepository;
+    private final OrderQueryRepository orderQueryRepository;
 
     // v1 : entity 직접 노출 NO!
     @GetMapping("/api/v1/orders")
@@ -72,6 +75,11 @@ public class OrderApiController {
                 .collect(Collectors.toList());
 
         return result;
+    }
+
+    @GetMapping("/api/v4/orders")
+    public List<OrderQueryDto> ordersV4() {
+        return orderQueryRepository.findOrderQueryDtos();
     }
 
     @Data
