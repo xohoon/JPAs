@@ -104,4 +104,17 @@ public class  OrderRepository {
         ).getResultList();
     }
 
+    // 컬렉션 페이조인 사용 x, 컬렉션 페치 조인은 1개만 사용가능,, 둘 이상 사용하면 데이터 부정합하게 조회
+    public List<Order> findAllWithItem() {
+
+        return em.createQuery(
+                "select distinct o from Order o" +
+                " join fetch o.member m" +
+                " join fetch o.delivery d" +
+                " join fetch o.orderItems oi" +
+                " join fetch oi.item i", Order.class)
+                .setFirstResult(1) // 결과값을 memory에서 페이징 처리함
+                .setMaxResults(100) // oneToMany 에서는 fetch join 하면 안됨
+                .getResultList();
+    }
 }
